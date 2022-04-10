@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,12 +13,20 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         _instance = this;
-        player = FindObjectOfType<CharacterMovement>();
-        playerStartPosition = player.gameObject.transform.position;
+        if(SceneManager.GetActiveScene().name.Contains("Level")) { 
+            player = FindObjectOfType<CharacterMovement>();
+            playerStartPosition = player.gameObject.transform.position;
+        }
     }
 
     public void OnDeath()
     {
         player.gameObject.transform.position = playerStartPosition;
+        UIManager.Instance.OnDeath();
+    }
+
+    public void nextRoom()
+    {
+
     }
 }

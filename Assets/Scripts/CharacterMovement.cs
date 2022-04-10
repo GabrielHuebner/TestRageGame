@@ -6,7 +6,7 @@ public class CharacterMovement : MonoBehaviour
 {
     public float MovementSpeed = 1;
     public float JumpForce = 1;
-    public float gravityMultilier = 1;
+    public float gravityMultiplier = 1;
 
     private Rigidbody2D _rigidbody;
     private bool isOnGround = true;
@@ -23,7 +23,7 @@ public class CharacterMovement : MonoBehaviour
     private void Update()
     {
         var movement = Input.GetAxis("Horizontal");
-        transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * MovementSpeed;
+        this.transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * MovementSpeed;
 
         if (Input.GetKeyDown(KeyCode.Space) && (isOnGround || doubleJump > 0)){
             _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
@@ -32,7 +32,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (!isOnGround)
         {
-            _rigidbody.velocity += Vector2.down * gravityMultilier;
+            _rigidbody.velocity += Vector2.down * gravityMultiplier;
         }
 
         if(transform.position.y < -15)
